@@ -32,8 +32,8 @@ export default function Navbar() {
             <Image
               src="/logo.jpeg"
               alt="CrabVeda Logo"
-              width={40}
-              height={40}
+              width={32}
+              height={32}
               className="nav-brand-img"
               priority
             />
@@ -66,7 +66,7 @@ export default function Navbar() {
           className="nav-mobile-trigger"
           aria-label="Toggle Menu"
         >
-          {open ? <X size={22} strokeWidth={2} /> : <Menu size={22} strokeWidth={2} />}
+          {open ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
         </button>
 
         {/* Mobile Overlay System */}
@@ -112,7 +112,6 @@ export default function Navbar() {
           --nav-gold: #C9901A;
           --nav-white: #FFFFFF;
           
-          /* Scrolls away natively with the website layout */
           position: relative; 
           z-index: 99999;
           background: var(--nav-bg);
@@ -125,12 +124,12 @@ export default function Navbar() {
         .static-nav-header {
           max-width: 1200px;
           margin: 0 auto;
-          padding: 18px 24px;
+          /* REDUCED HEIGHT: Changed padding from 18px to 10px */
+          padding: 10px 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           box-sizing: border-box;
-          /* Crucial so that the absolute mobile menu overlays perfectly below this row */
           position: relative; 
         }
 
@@ -138,13 +137,14 @@ export default function Navbar() {
         .nav-logo-link {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 10px;
           text-decoration: none;
         }
 
         .nav-logo-wrapper {
-          width: 40px;
-          height: 40px;
+          /* REDUCED HEIGHT: Sized wrapper container down to match 32px constraints */
+          width: 35px;
+          height: 35px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -171,7 +171,7 @@ export default function Navbar() {
 
         .nav-logo-title {
           font-family: 'Cinzel', serif;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           font-weight: 700;
           color: var(--nav-text) !important;
           letter-spacing: 0.02em;
@@ -180,28 +180,28 @@ export default function Navbar() {
 
         .nav-logo-subtitle {
           font-family: 'Lora', serif;
-          font-size: 0.58rem;
+          font-size: 0.55rem;
           color: var(--nav-gold) !important;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           font-weight: 600;
-          margin-top: 2px;
+          margin-top: 1px;
         }
 
         /* Desktop Nav Items */
         .nav-desktop-links {
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 4px;
         }
 
         .nav-item {
           text-decoration: none;
           color: var(--nav-text) !important;
           font-family: 'Lora', serif;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 500;
-          padding: 8px 16px;
+          padding: 6px 14px;
           border-radius: 100px;
           opacity: 0.8;
           transition: all 0.2s ease;
@@ -219,9 +219,9 @@ export default function Navbar() {
           background-color: var(--nav-text);
           color: var(--nav-white) !important;
           font-family: 'Lora', serif;
-          font-size: 0.8rem;
+          font-size: 0.75rem;
           font-weight: 600;
-          padding: 10px 22px;
+          padding: 8px 18px;
           border-radius: 100px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
@@ -230,7 +230,7 @@ export default function Navbar() {
 
         .nav-cta:hover {
           background-color: var(--nav-gold);
-          box-shadow: 0 4px 15px rgba(201, 144, 26, 0.2);
+          box-shadow: 0 4px 12px rgba(201, 144, 26, 0.15);
         }
 
         .nav-mobile-trigger {
@@ -239,7 +239,7 @@ export default function Navbar() {
           border: none;
           color: var(--nav-text);
           cursor: pointer;
-          padding: 6px;
+          padding: 4px;
         }
 
         .nav-mobile-overlay {
@@ -257,20 +257,19 @@ export default function Navbar() {
           .nav-mobile-trigger {
             display: flex;
             position: relative;
-            z-index: 100001; /* Ensure trigger stays above overlay */
+            z-index: 100001;
           }
 
-          /* FIXED BUG: Dropdown is absolute positioned inside the scrolling block */
           .menu-is-open .nav-mobile-overlay {
             display: block;
             position: absolute;
-            top: 100%; /* Spans cleanly starting right below the header bounds */
+            top: 100%; 
             left: 0;
             right: 0;
             background: #FDFBF7;
             border-top: 1px solid var(--nav-border);
             border-bottom: 1px solid var(--nav-border);
-            padding: 32px 24px;
+            padding: 30px 24px;
             box-sizing: border-box;
             z-index: 100000;
             box-shadow: 0 10px 30px rgba(26, 16, 8, 0.05);
@@ -280,7 +279,7 @@ export default function Navbar() {
           .nav-mobile-inner-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
             max-width: 500px;
             margin: 0 auto;
           }
@@ -289,9 +288,9 @@ export default function Navbar() {
             text-decoration: none;
             color: var(--nav-text) !important;
             font-family: 'Lora', serif;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 500;
-            padding: 12px 0;
+            padding: 10px 0;
             border-bottom: 1px solid rgba(26, 16, 8, 0.04);
           }
 
@@ -303,11 +302,11 @@ export default function Navbar() {
             color: var(--nav-white) !important;
             text-decoration: none;
             font-family: 'Lora', serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            padding: 14px;
-            border-radius: 12px;
-            margin-top: 12px;
+            padding: 12px;
+            border-radius: 100px;
+            margin-top: 8px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             box-shadow: 0 4px 12px rgba(18, 140, 126, 0.15);
@@ -317,7 +316,7 @@ export default function Navbar() {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-top: 8px;
+            margin-top: 6px;
           }
 
           .mobile-social-pill {
@@ -325,10 +324,10 @@ export default function Navbar() {
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 100px;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
           }
 
