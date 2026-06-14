@@ -112,11 +112,8 @@ export default function Navbar() {
           --nav-gold: #C9901A;
           --nav-white: #FFFFFF;
           
-          /* Changed from fixed to absolute so it stays at the top of the document stream */
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
+          /* Scrolls away natively with the website layout */
+          position: relative; 
           z-index: 99999;
           background: var(--nav-bg);
           backdrop-filter: blur(20px) saturate(160%);
@@ -133,6 +130,8 @@ export default function Navbar() {
           align-items: center;
           justify-content: space-between;
           box-sizing: border-box;
+          /* Crucial so that the absolute mobile menu overlays perfectly below this row */
+          position: relative; 
         }
 
         /* Branding Styles */
@@ -248,7 +247,7 @@ export default function Navbar() {
         }
 
         /* ==========================================================================
-           RESPONSIVE CODEBREAKS & FIXED SLIDEOUTS
+           RESPONSIVE CODEBREAKS & SCROLLING MOBILE PANELS
            ========================================================================== */
         @media (max-width: 992px) {
           .nav-desktop-links, .nav-desktop-action {
@@ -257,22 +256,24 @@ export default function Navbar() {
 
           .nav-mobile-trigger {
             display: flex;
+            position: relative;
+            z-index: 100001; /* Ensure trigger stays above overlay */
           }
 
-          /* Note: The mobile dropdown remains fixed when OPENED to ensure 
-             the user can use the menu comfortably without it scrolling away. */
+          /* FIXED BUG: Dropdown is absolute positioned inside the scrolling block */
           .menu-is-open .nav-mobile-overlay {
             display: block;
-            position: fixed;
-            top: 77px; 
+            position: absolute;
+            top: 100%; /* Spans cleanly starting right below the header bounds */
             left: 0;
             right: 0;
-            bottom: 0;
             background: #FDFBF7;
             border-top: 1px solid var(--nav-border);
+            border-bottom: 1px solid var(--nav-border);
             padding: 32px 24px;
             box-sizing: border-box;
-            overflow-y: auto;
+            z-index: 100000;
+            box-shadow: 0 10px 30px rgba(26, 16, 8, 0.05);
             animation: mobileNavFade 0.25s ease-out forwards;
           }
 
@@ -343,7 +344,7 @@ export default function Navbar() {
         }
 
         @keyframes mobileNavFade {
-          from { opacity: 0; transform: translateY(-8px); }
+          from { opacity: 0; transform: translateY(-4px); }
           to { opacity: 1; transform: translateY(0); }
         }
       `}</style>

@@ -343,7 +343,7 @@ export default function Hero() {
         @media (max-width: 600px) {
           .premium-hero {
             /* Gives comfortable breathing room from a top fixed header */
-            padding: 75px 16px 48px;
+            padding: 0px 16px 48px;
           }
 
           .hero-interface-wrapper {
