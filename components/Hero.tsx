@@ -6,337 +6,387 @@ const WHATSAPP_URL =
 
 export default function Hero() {
   return (
-    <section className="modern-hero">
-      <div className="hero-container">
+    <section className="premium-hero">
+      
+      {/* IMMERSIVE BACKGROUND CANVAS */}
+      <div className="hero-bg-viewport">
+        <Image 
+          src="/img1.jpeg" 
+          alt="Ayurvedic Natural Ingredients Backdrop" 
+          fill
+          priority
+          className="bg-core-image"
+        />
+        <div className="bg-dynamic-overlay" />
+      </div>
+
+      <div className="hero-interface-wrapper">
         
-        {/* EDITORIAL MEDIA STAGE: Side-by-side elements on both desktop and mobile */}
-        <div className="hero-media-stage">
-          
-          {/* Left Panel: The Lifestyle Context */}
-          <div className="media-panel lifestyle-panel">
+        {/* DESKTOP-ONLY PRODUCT SHOWCASE PANEL */}
+        <div className="desktop-product-panel">
+          <div className="glass-display-case">
             <Image 
-              src="/img1.jpeg" 
-              alt="Ayurvedic Natural Ingredients" 
-              fill
+              src="/img2.jpeg" 
+              alt="CrabVeda Bottle" 
+              width={240} 
+              height={320} 
               priority
-              className="panel-img"
+              className="desktop-only-bottle"
             />
           </div>
-
-          {/* Right Panel: The Product Display */}
-          <div className="media-panel product-panel">
-            <div className="product-img-wrapper">
-              <Image 
-                src="/img2.jpeg" 
-                alt="CrabVeda Bottle" 
-                width={180} 
-                height={240} 
-                priority
-                className="actual-product-img"
-              />
-            </div>
-          </div>
-
         </div>
 
-        {/* TEXT STAGE */}
-        <div className="hero-text-stage">
-          <div className="mini-badge">100% Authentic Ayurveda</div>
+        {/* CONTEMPORARY EDITORIAL COPY PANEL */}
+        <div className="editorial-text-panel">
+          <div className="capsule-badge">100% Authentic Ayurveda</div>
           
-          <h1 className="main-title">
-            CrabVeda <span className="serif-subtitle">Ayurvedic Crab Oil</span>
+          <h1 className="hero-heading">
+            CrabVeda <span className="hero-subheading">Ayurvedic Crab Oil</span>
           </h1>
           
-          <p className="description-paragraph">
+          <p className="hero-narrative">
             A premium therapeutic formulation engineered to naturally relieve deep joint stiffness, reduce localized inflammation, and restore structural mobility.
           </p>
           
-          <div className="pills-container">
-            <span className="benefit-pill">🦴 Joint Relief</span>
-            <span className="benefit-pill">🔥 Anti-Swelling</span>
-            <span className="benefit-pill">🏃 Free Mobility</span>
+          <div className="pills-flexbox">
+            <span className="pill-tag">🦴 Joint Relief</span>
+            <span className="pill-tag">🔥 Anti-Swelling</span>
+            <span className="pill-tag">🏃 Free Mobility</span>
           </div>
 
-          <div className="checkout-bar">
-            <div className="price-box">
-              <div className="price-row">
-                <span className="price-current">₹360</span>
-                <span className="price-old">₹450</span>
-              </div>
-              <p className="price-details">200ml · Free Shipping</p>
-            </div>
+          {/* DYNAMIC HYBRID TRANSACTION FRAME */}
+          <div className="unified-action-card">
             
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cta-button">
-              <WhatsAppIcon />
-              <span>Order via WhatsApp</span>
-            </a>
+            {/* Mobile-Only Integrated Bottle (Perfect size, stays inside the card) */}
+            <div className="mobile-product-thumbnail">
+              <Image 
+                src="/img2.jpeg" 
+                alt="CrabVeda Bottle" 
+                width={70} 
+                height={95} 
+                priority
+                className="mobile-inline-bottle"
+              />
+            </div>
+
+            <div className="action-details-split">
+              <div className="pricing-cluster">
+                <div className="price-line">
+                  <span className="tag-current">₹360</span>
+                  <span className="tag-was">₹450</span>
+                </div>
+                <p className="tag-meta">200ml · Free Express Shipping</p>
+              </div>
+              
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="action-cta">
+                <WhatsAppIcon />
+                <span>Order via WhatsApp</span>
+              </a>
+            </div>
+
           </div>
         </div>
 
       </div>
 
       <style>{`
-        .modern-hero {
-          --dark-green: #1E3A2F;
-          --gold: #C9901A;
-          --slate: #475569;
-          --canvas-bg: #FAF9F6;
+        .premium-hero {
+          --emerald: #1E3A2F;
+          --amber: #C9901A;
+          --slate-light: #64748B;
+          --card-glass: rgba(255, 255, 255, 0.9);
           
+          position: relative;
           min-height: 100vh;
-          background-color: var(--canvas-bg);
+          width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 140px 24px 60px;
+          padding: 120px 40px 60px;
           box-sizing: border-box;
-          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+          overflow: hidden;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        .hero-container {
-          max-width: 1100px;
+        /* --- Full Screen Adaptive Backdrop --- */
+        .hero-bg-viewport {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+        }
+
+        .bg-core-image {
+          object-fit: cover;
+        }
+
+        /* Ambient gradient masking: handles legibility across all screen viewports */
+        .bg-dynamic-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, #FAF9F6 45%, rgba(250,249,246,0.85) 65%, rgba(250,249,246,0.2) 100%);
+        }
+
+        .hero-interface-wrapper {
+          position: relative;
+          z-index: 2;
+          max-width: 1140px;
           width: 100%;
           display: grid;
-          grid-template-columns: 1.15fr 0.85fr;
+          grid-template-columns: 0.9fr 1.1fr;
           gap: 64px;
           align-items: center;
         }
 
-        /* --- Media Stage (Side-by-Side Canvas) --- */
-        .hero-media-stage {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          width: 100%;
-          height: 520px;
-        }
-
-        .media-panel {
-          position: relative;
-          border-radius: 20px;
-          overflow: hidden;
-          background: #ffffff;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-          border: 1px solid rgba(0,0,0,0.03);
-        }
-
-        .panel-img {
-          object-fit: cover;
-        }
-
-        .product-panel {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-        }
-
-        .product-img-wrapper {
-          position: relative;
-          width: 100%;
-          height: 100%;
+        /* --- Desktop Layout Architecture --- */
+        .desktop-product-panel {
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        .actual-product-img {
+        .glass-display-case {
+          background: rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 40px;
+          border-radius: 28px;
+          border: 1px solid rgba(255,255,255,0.6);
+          box-shadow: 0 30px 60px rgba(30,58,47,0.1);
+        }
+
+        .desktop-only-bottle {
           object-fit: contain;
-          max-width: 100%;
-          height: auto;
+          filter: drop-shadow(0 20px 30px rgba(30,58,47,0.15));
         }
 
-        /* --- Text Area --- */
-        .hero-text-stage {
+        .mobile-product-thumbnail {
+          display: none; /* Invisible on desktop */
+        }
+
+        /* --- Copywriting Architecture --- */
+        .editorial-text-panel {
           display: flex;
           flex-direction: column;
+          align-items: flex-start;
         }
 
-        .mini-badge {
-          align-self: flex-start;
-          background: #FFF;
-          border: 1px solid rgba(0,0,0,0.08);
+        .capsule-badge {
+          background: var(--emerald);
+          color: #FFF;
           padding: 6px 14px;
           border-radius: 100px;
           font-size: 0.75rem;
           font-weight: 600;
-          letter-spacing: 0.02em;
-          color: var(--dark-green);
-          margin-bottom: 20px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 24px;
         }
 
-        .main-title {
-          font-size: 3.5rem;
+        .hero-heading {
+          font-size: 4rem;
           font-weight: 800;
-          color: var(--dark-green);
+          color: var(--emerald);
           margin: 0 0 16px;
-          letter-spacing: -0.02em;
-          line-height: 1.1;
+          letter-spacing: -0.03em;
+          line-height: 1.05;
         }
 
-        .serif-subtitle {
+        .hero-subheading {
           display: block;
           font-family: Georgia, serif;
           font-weight: 400;
           font-style: italic;
-          font-size: 1.75rem;
-          color: var(--gold);
-          margin-top: 4px;
+          font-size: 1.8rem;
+          color: var(--amber);
+          margin-top: 6px;
         }
 
-        .description-paragraph {
-          font-size: 1.05rem;
-          line-height: 1.6;
-          color: var(--slate);
-          margin: 0 0 28px;
+        .hero-narrative {
+          font-size: 1.1rem;
+          line-height: 1.65;
+          color: #2D3748;
+          margin: 0 0 32px;
           max-width: 500px;
         }
 
-        .pills-container {
+        .pills-flexbox {
           display: flex;
           gap: 10px;
           flex-wrap: wrap;
           margin-bottom: 40px;
         }
 
-        .benefit-pill {
-          background: rgba(30,58,47,0.05);
-          color: var(--dark-green);
+        .pill-tag {
+          background: rgba(30, 58, 47, 0.07);
+          color: var(--emerald);
           padding: 6px 14px;
-          border-radius: 100px;
+          border-radius: 8px;
           font-size: 0.85rem;
-          font-weight: 500;
+          font-weight: 600;
         }
 
-        .checkout-bar {
+        /* --- Desktop Action Box --- */
+        .unified-action-card {
+          background: #FFF;
+          border: 1px solid rgba(0,0,0,0.05);
+          border-radius: 24px;
+          padding: 20px 24px;
+          width: 100%;
+          max-width: 520px;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.03);
+          box-sizing: border-box;
+        }
+
+        .action-details-split {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: #FFF;
-          border: 1px solid rgba(0,0,0,0.05);
-          border-radius: 18px;
-          padding: 14px 20px;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.02);
+          width: 100%;
+          gap: 20px;
         }
 
-        .price-row {
+        .price-line {
           display: flex;
           align-items: baseline;
-          gap: 6px;
+          gap: 8px;
         }
 
-        .price-current {
-          font-size: 1.8rem;
-          font-weight: 700;
-          color: var(--dark-green);
+        .tag-current {
+          font-size: 2.2rem;
+          font-weight: 800;
+          color: var(--emerald);
+          letter-spacing: -0.02em;
         }
 
-        .price-old {
-          font-size: 0.95rem;
-          color: var(--slate);
+        .tag-was {
+          font-size: 1.05rem;
+          color: var(--slate-light);
           text-decoration: line-through;
         }
 
-        .price-details {
+        .tag-meta {
           margin: 2px 0 0;
-          font-size: 0.75rem;
-          color: var(--slate);
+          font-size: 0.8rem;
+          color: var(--slate-light);
+          font-weight: 500;
         }
 
-        .cta-button {
+        .action-cta {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 8px;
-          background: #1E293B;
+          background: #111827;
           color: #FFF;
-          padding: 14px 24px;
-          border-radius: 12px;
-          font-size: 0.9rem;
+          padding: 16px 28px;
+          border-radius: 14px;
+          font-size: 0.95rem;
           font-weight: 600;
           text-decoration: none;
-          transition: background 0.2s;
+          transition: background 0.15s;
+          flex-shrink: 0;
         }
 
-        .cta-button:hover {
-          background: #0F172A;
+        .action-cta:hover {
+          background: #1F2937;
         }
 
         /* ==========================================================================
-           HIGH-END EDITORIAL MOBILE BREAKPOINT
+           LUXURY IMMERSIVE MOBILE SYSTEM (Zero Clashing / Zero Layout Overlaps)
            ========================================================================== */
-        @media (max-width: 900px) {
-          .modern-hero {
-            padding: 110px 16px 40px;
+        @media (max-width: 968px) {
+          .premium-hero {
+            padding: 80px 16px 32px;
+            align-items: flex-end; /* Snaps interface cleanly to user view base */
           }
 
-          .hero-container {
+          /* Mask transforms into an elegant soft vertical shroud over the backdrop image */
+          .bg-dynamic-overlay {
+            background: linear-gradient(180deg, rgba(250,249,246,0.65) 0%, #FAF9F6 60%, #FAF9F6 100%);
+          }
+
+          .hero-interface-wrapper {
             grid-template-columns: 1fr;
-            gap: 36px;
+            gap: 0;
           }
 
-          /* Fixed: Smoothly scales to an elegant, equal-split double canvas row */
-          .hero-media-stage {
-            height: 240px; 
+          /* Wipe out the desktop display module completely on mobile */
+          .desktop-product-panel {
+            display: none !important;
+          }
+
+          .editorial-text-panel {
+            align-items: center;
+            text-align: center;
+            width: 100%;
+          }
+
+          .capsule-badge {
+            margin-bottom: 16px;
+          }
+
+          .hero-heading {
+            font-size: 2.8rem;
+          }
+
+          .hero-subheading {
+            font-size: 1.4rem;
+          }
+
+          .hero-narrative {
+            font-size: 0.98rem;
+            margin-bottom: 24px;
+          }
+
+          .pills-flexbox {
+            justify-content: center;
+            margin-bottom: 32px;
+          }
+
+          /* Transform bottom action card into a sleek container holding the bottle image safely inside */
+          .unified-action-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.8);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 16px;
+            padding: 16px;
+            align-items: center;
+            box-shadow: 0 15px 40px rgba(30,58,47,0.08);
+            max-width: 100%;
+            text-align: left;
+          }
+
+          /* Reveal the product image dynamically inside the protected bounds of the checkout card */
+          .mobile-product-thumbnail {
+            display: block;
+            background: #FFF;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            flex-shrink: 0;
+          }
+
+          .mobile-inline-bottle {
+            object-fit: contain;
+          }
+
+          .action-details-split {
+            flex-direction: column;
+            align-items: stretch;
             gap: 12px;
           }
 
-          .media-panel {
-            border-radius: 14px;
+          .tag-current {
+            font-size: 1.8rem;
           }
 
-          .product-panel {
-            padding: 12px;
-          }
-
-          .actual-product-img {
-            max-height: 180px;
-          }
-
-          /* Text adjustments below images */
-          .hero-text-stage {
-            align-items: center;
-            text-align: center;
-          }
-
-          .mini-badge {
-            margin-bottom: 12px;
-            align-self: center;
-          }
-
-          .main-title {
-            font-size: 2.5rem;
-          }
-
-          .serif-subtitle {
-            font-size: 1.35rem;
-          }
-
-          .description-paragraph {
-            font-size: 0.95rem;
-            max-width: 100%;
-            margin-bottom: 20px;
-          }
-
-          .pills-container {
-            justify-content: center;
-            margin-bottom: 28px;
-          }
-
-          .checkout-bar {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 16px;
+          .action-cta {
+            padding: 14px;
             width: 100%;
-            padding: 20px;
             box-sizing: border-box;
-          }
-
-          .price-row {
-            justify-content: center;
-          }
-
-          .cta-button {
-            justify-content: center;
-            padding: 16px;
           }
         }
       `}</style>

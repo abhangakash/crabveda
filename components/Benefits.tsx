@@ -138,8 +138,8 @@ export default function Benefits() {
         .section-main-heading {
           font-family: var(--font-display), serif;
           font-size: clamp(2rem, 3.5vw, 2.8rem);
-          color: var(--forest);
-          line-height: 1.15;
+          color: #4A3428 !important;
+           line-height: 1.15;
           margin: 0 0 16px 0;
           font-weight: 700;
           letter-spacing: -0.01em;
