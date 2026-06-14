@@ -82,7 +82,8 @@ export default function Hero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 120px 40px 80px;
+          /* Balanced desktop layout padding configuration */
+          padding: 140px 40px 80px; 
           box-sizing: border-box;
           overflow: hidden;
           background-color: var(--canvas-cream);
@@ -286,77 +287,109 @@ export default function Hero() {
         }
 
         /* ==========================================================================
-           MOBILE SYSTEM: Full width image at the absolute top, content underneath
+           TABLET & MOBILE BREAKPOINTS (Fixed overlapping layout errors)
            ========================================================================== */
         @media (max-width: 968px) {
           .premium-hero {
-            padding: 55px 0 0 0; /* Clear top padding so image hugs the screen edge */
+            /* 100px to 110px leaves optimal structural buffer for fixed components */
+            padding: 110px 24px 60px; 
+            min-height: auto; /* Avoid forced 100vh page stretching issues on tablet */
           }
 
           .hero-interface-wrapper {
             display: flex;
-            flex-direction: column; /* Stacks vertically */
-            gap: 32px;
+            flex-direction: column;
+            gap: 40px;
           }
 
-          /* Force image module to the top of the flex container */
           .product-visual-showcase {
             order: 1;
             width: 100%;
           }
 
           .hero-banner-inner-box {
-              position: relative;
-              width: 100vw;
-              margin-left: calc(50% - 50vw);
-              aspect-ratio: 16 / 10;
-              border-radius: 0;
-              overflow: hidden;
-              box-shadow: none;
-            }
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 10;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(26, 16, 8, 0.04);
+          }
 
-            .hero-main-banner-img {
-              object-fit: cover;
-              object-position: center center;
-            }
+          .hero-main-banner-img {
+            object-fit: cover;
+            object-position: center center;
+          }
 
-          /* Content panel follows gracefully beneath the image */
           .editorial-text-panel {
             order: 2;
-            padding: 0 20px;
-            box-sizing: border-box;
+            padding: 0;
             align-items: center;
             text-align: center;
           }
 
-          .hero-heading {
-            font-size: 2.4rem;
-            margin: 0 0 12px;
-          }
-
-          .hero-subheading {
-            font-size: 1.25rem;
-          }
-
           .hero-narrative {
-            font-size: 0.98rem;
-            margin-bottom: 24px;
+            max-width: 600px;
           }
 
           .pills-flexbox {
             justify-content: center;
-            margin-bottom: 32px;
-            gap: 8px;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .premium-hero {
+            /* Gives comfortable breathing room from a top fixed header */
+            padding: 96px 16px 48px;
+          }
+
+          .hero-interface-wrapper {
+            gap: 28px;
+          }
+
+          .hero-banner-inner-box {
+  position: relative;
+  width: calc(100vw + 32px);
+  margin-left: -16px;
+  margin-right: -16px;
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+          .editorial-text-panel {
+            padding: 0 8px;
+          }
+
+          .hero-heading {
+            font-size: 2.2rem;
+            margin: 0 0 12px;
+          }
+
+          .hero-subheading {
+            font-size: 1.2rem;
+          }
+
+          .hero-narrative {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+          }
+
+          .pills-flexbox {
+            margin-bottom: 28px;
+            gap: 6px;
           }
 
           .pill-tag {
-            padding: 6px 14px;
-            font-size: 0.8rem;
+            padding: 6px 12px;
+            font-size: 0.78rem;
           }
 
           .unified-action-card {
-            max-width: 100%;
-            padding: 20px;
+            padding: 16px;
           }
 
           .action-details-split {
@@ -371,13 +404,12 @@ export default function Hero() {
           }
 
           .tag-current {
-            font-size: 2rem;
+            font-size: 1.85rem;
           }
 
           .action-cta {
             padding: 14px;
             width: 100%;
-            box-sizing: border-box;
           }
         }
       `}</style>
