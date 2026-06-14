@@ -290,7 +290,7 @@ export default function Hero() {
            ========================================================================== */
         @media (max-width: 968px) {
           .premium-hero {
-            padding: 5px 0 0 0; /* Clear top padding so image hugs the screen edge */
+            padding: 55px 0 0 0; /* Clear top padding so image hugs the screen edge */
           }
 
           .hero-interface-wrapper {

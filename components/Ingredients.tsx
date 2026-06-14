@@ -1,7 +1,16 @@
 "use client";
 import Image from "next/image";
 
-const ingredients = [
+// Define a strict shape for your structural ingredient assets
+interface Ingredient {
+  name: string;
+  icon: string;
+  benefit: string;
+  image?: string; // Optional field for regular botanical items
+  hero?: boolean;
+}
+
+const ingredients: Ingredient[] = [
   { 
     name: "Crab Extract", 
     image: "/img5.png",
@@ -42,20 +51,19 @@ export default function Ingredients() {
         {/* Dynamic Architectural Layout */}
         <div className="ingredients-layout-grid">
           
-          {/* THE HERO CARD: No separate blocks. Text is layered directly ON top of the image */}
+          {/* THE HERO CARD: Rendered safely only if hero exists with an image fallback constraint */}
           {heroIngredient && (
             <div className="ingredient-hero-card">
               
-              {heroIngredient.image && (
-                <Image
-                  src={heroIngredient.image}
-                  alt={heroIngredient.name}
-                  fill
-                  sizes="(max-width: 1200px) 100vw, 1200px"
-                  className="hero-background-media"
-                  priority
-                />
-              )}
+              {/* Full-Bleed Background Image Component */}
+              <Image 
+                src={heroIngredient.image || "/img5.png"} 
+                alt={heroIngredient.name}
+                fill
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="hero-background-media"
+                priority
+              />
               
               {/* Dark Shroud Layer to ensure text is perfectly legible over the image */}
               <div className="hero-image-overlay-shroud" />
@@ -181,12 +189,12 @@ export default function Ingredients() {
         .ingredient-hero-card {
           position: relative;
           width: 100%;
-          min-height: 440px; /* Great cinematic canvas height */
+          min-height: 440px; 
           border-radius: 24px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          justify-content: flex-end; /* Pushes content down elegantly, or change to center/flex-start depending on framing */
+          justify-content: flex-end; 
           box-shadow: 0 20px 40px rgba(30, 58, 47, 0.12);
         }
 
@@ -196,7 +204,6 @@ export default function Ingredients() {
           z-index: 1;
         }
 
-        /* Ambient shroud to protect text readability on all viewports */
         .hero-image-overlay-shroud {
           position: absolute;
           inset: 0;
@@ -204,7 +211,6 @@ export default function Ingredients() {
           z-index: 2;
         }
 
-        /* Content block floating safely above the background graphic */
         .hero-card-content-overlay {
           position: relative;
           z-index: 3;
