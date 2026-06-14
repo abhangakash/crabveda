@@ -46,15 +46,16 @@ export default function Ingredients() {
           {heroIngredient && (
             <div className="ingredient-hero-card">
               
-              {/* Full-Bleed Background Image Component */}
-              <Image 
-                src={heroIngredient.image}
-                alt={heroIngredient.name}
-                fill
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                className="hero-background-media"
-                priority
-              />
+              {heroIngredient.image && (
+                <Image
+                  src={heroIngredient.image}
+                  alt={heroIngredient.name}
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="hero-background-media"
+                  priority
+                />
+              )}
               
               {/* Dark Shroud Layer to ensure text is perfectly legible over the image */}
               <div className="hero-image-overlay-shroud" />
