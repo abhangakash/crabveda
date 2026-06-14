@@ -5,160 +5,262 @@ const WHATSAPP_URL =
 
 export default function Footer() {
   return (
-    <footer style={{
-      background: "#0A1A0F",
-      color: "rgba(255,255,255,0.6)",
-      padding: "48px 24px 28px",
-      borderTop: "1px solid rgba(201,144,26,0.2)",
-    }}>
-      <div className="container">
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr",
-          gap: 40,
-          marginBottom: 40,
-        }}>
-          {/* Brand */}
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <div style={{
-                width: 40, height: 40, borderRadius: "50%",
-                background: "linear-gradient(135deg, #E8B84B, #C9901A)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "1.2rem",
-              }}>🦀</div>
-              <div>
-                <div style={{
-                  fontFamily: "var(--font-display)",
-                  fontSize: "1.1rem",
-                  color: "white",
-                  fontWeight: 700,
-                  letterSpacing: "0.06em",
-                  lineHeight: 1.1,
-                }}>CrabVeda</div>
-                <div style={{
-                  fontSize: "0.6rem",
-                  color: "var(--gold)",
-                  letterSpacing: "0.15em",
-                  fontFamily: "var(--font-display)",
-                }}>AYURVEDIC</div>
-              </div>
-            </div>
-            <p style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "0.85rem",
-              lineHeight: 1.8,
-              maxWidth: 280,
-              marginBottom: 20,
-            }}>
-              A unique Ayurvedic formulation with natural crab extract and powerful herbs
-              for joint pain relief, inflammation reduction and improved mobility.
-            </p>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: "1rem" }}>🇮🇳</span>
-              <span style={{ fontSize: "0.8rem", fontFamily: "var(--font-body)" }}>
-                Made with tradition. Backed by nature.
-              </span>
+    <footer className="minimal-footer">
+      <div className="footer-wrapper">
+        
+        {/* Top Section: Clean Center Brand Lockup */}
+        <div className="footer-brand-section">
+          <div className="footer-logo">
+            <span className="logo-icon">🦀</span>
+            <div className="logo-text-group">
+              <span className="logo-main">CrabVeda</span>
+              <span className="logo-sub">Ayurvedic</span>
             </div>
           </div>
+          <p className="footer-tagline">
+            Traditional wisdom. Natural relief. Formulated for joint mobility and deep inflammation recovery.
+          </p>
+        </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "0.8rem",
-              color: "var(--gold-light)",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}>
-              Quick Links
-            </h4>
-            {["#home", "#benefits", "#ingredients", "#how-to-use", "#testimonials", "#contact"].map((href) => (
-              <div key={href} style={{ marginBottom: 10 }}>
-                <a href={href} style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "0.85rem",
-                  color: "rgba(255,255,255,0.55)",
-                  textDecoration: "none",
-                  transition: "color 0.2s",
-                  textTransform: "capitalize",
-                }}
-                onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "var(--gold-light)")}
-                onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.55)")}
-                >
-                  {href.replace("#", "").replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
-                </a>
-              </div>
-            ))}
-          </div>
+        {/* Middle Section: Clean Row of Quick Links */}
+        <nav className="footer-nav">
+          {["#home", "#benefits", "#ingredients", "#how-to-use", "#testimonials", "#contact"].map((href) => (
+            <a key={href} href={href} className="footer-nav-link">
+              {href.replace("#", "").replace(/-/g, " ")}
+            </a>
+          ))}
+        </nav>
 
-          {/* Contact */}
-          <div>
-            <h4 style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "0.8rem",
-              color: "var(--gold-light)",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-            }}>
-              Contact
-            </h4>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              <a href="tel:+919921297518" style={{
-                color: "rgba(255,255,255,0.55)",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-                fontFamily: "var(--font-body)",
-              }}>📞 +91 99212 97518</a>
-              <a href="mailto:crabveda@gmail.com" style={{
-                color: "rgba(255,255,255,0.55)",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-                fontFamily: "var(--font-body)",
-              }}>📧 crabveda@gmail.com</a>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" style={{
-                color: "#25D366",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-                fontFamily: "var(--font-body)",
-                fontWeight: 600,
-              }}>💬 Order on WhatsApp</a>
-            </div>
+        {/* Action Section: Premium Full-Width Touch Buttons for Mobile */}
+        <div className="footer-actions">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="action-pill whatsapp-pill">
+            <span className="pill-icon">💬</span>
+            <span className="pill-text">Order via WhatsApp</span>
+          </a>
+          
+          <div className="action-group-secondary">
+            <a href="tel:+919921297518" className="action-pill secondary-pill">
+              <span>📞 Call Support</span>
+            </a>
+            <a href="mailto:crabveda@gmail.com" className="action-pill secondary-pill">
+              <span>📧 Email Us</span>
+            </a>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div style={{
-          borderTop: "1px solid rgba(255,255,255,0.07)",
-          paddingTop: 20,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 12,
-        }}>
-          <div style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "0.78rem",
-          }}>
-            © {new Date().getFullYear()} CrabVeda Ayurvedic. All rights reserved.
+        {/* Bottom Section: Minimalist Compliance Line */}
+        <div className="footer-bottom">
+          <div className="compliance-row">
+            <span>© {new Date().getFullYear()} CrabVeda Ayurvedic</span>
+            <span className="divider-dot">•</span>
+            <span>Batch: CV0001</span>
+            <span className="divider-dot">•</span>
+            <span>India</span>
           </div>
-          <div style={{
-            fontFamily: "var(--font-body)",
-            fontSize: "0.78rem",
-            color: "rgba(255,255,255,0.35)",
-          }}>
-            Marketed by CrabVeda Ayurvedic · India · Batch: CV0001
-          </div>
+          <p className="legal-disclaimer">
+            Marketed by CrabVeda Ayurvedic. Made with traditional natural extracts.
+          </p>
         </div>
+
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          footer .container > div:first-child { grid-template-columns: 1fr !important; gap: 32px !important; }
-          footer .container > div:last-child { flex-direction: column; text-align: center; }
+        .minimal-footer {
+          --f-bg: #0A140E;
+          --f-gold: #C9901A;
+          --f-text: #A1AFA7;
+          --f-text-light: #FFFFFF;
+          --f-border: rgba(255, 255, 255, 0.08);
+
+          background-color: var(--f-bg);
+          color: var(--f-text);
+          padding: 60px 20px 40px;
+          border-top: 1px solid rgba(201, 144, 26, 0.15);
+          font-family: var(--font-body), -apple-system, BlinkMacSystemFont, sans-serif;
+          box-sizing: border-box;
+        }
+
+        .footer-wrapper {
+          max-width: 800px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        /* --- Brand Stack --- */
+        .footer-brand-section {
+          margin-bottom: 40px;
+        }
+
+        .footer-logo {
+          display: inline-flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 16px;
+        }
+
+        .logo-icon {
+          font-size: 1.5rem;
+        }
+
+        .logo-text-group {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .logo-main {
+          font-family: var(--font-display), serif;
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: var(--f-text-light);
+          letter-spacing: 0.02em;
+          line-height: 1;
+        }
+
+        .logo-sub {
+          font-family: var(--font-display), serif;
+          font-size: 0.65rem;
+          color: var(--f-gold);
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          margin-top: 2px;
+        }
+
+        .footer-tagline {
+          font-size: 0.9rem;
+          line-height: 1.6;
+          max-width: 460px;
+          margin: 0 auto;
+          opacity: 0.85;
+        }
+
+        /* --- Horizontal Navigation Links --- */
+        .footer-nav {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 16px 24px;
+          padding: 24px 0;
+          width: 100%;
+          border-top: 1px solid var(--f-border);
+          border-bottom: 1px solid var(--f-border);
+          margin-bottom: 40px;
+        }
+
+        .footer-nav-link {
+          color: var(--f-text);
+          text-decoration: none;
+          font-size: 0.88rem;
+          text-transform: capitalize;
+          transition: color 0.2s ease;
+        }
+
+        .footer-nav-link:hover {
+          color: var(--f-gold);
+        }
+
+        /* --- Mobile First Premium Buttons --- */
+        .footer-actions {
+          width: 100%;
+          max-width: 480px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-bottom: 48px;
+        }
+
+        .action-pill {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 16px;
+          border-radius: 12px;
+          text-decoration: none;
+          font-size: 0.95rem;
+          font-weight: 600;
+          transition: all 0.2s ease;
+          box-sizing: border-box;
+        }
+
+        .whatsapp-pill {
+          background-color: #128C7E;
+          color: white;
+        }
+
+        .whatsapp-pill:hover {
+          background-color: #0f7569;
+        }
+
+        .action-group-secondary {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+
+        .secondary-pill {
+          background-color: rgba(255, 255, 255, 0.04);
+          border: 1px solid var(--f-border);
+          color: var(--f-text-light);
+          font-size: 0.85rem;
+        }
+
+        .secondary-pill:hover {
+          background-color: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Bottom Meta / Compliance --- */
+        .footer-bottom {
+          width: 100%;
+          font-size: 0.78rem;
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .compliance-row {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 8px;
+        }
+
+        .divider-dot {
+          color: var(--f-gold);
+          opacity: 0.5;
+        }
+
+        .legal-disclaimer {
+          margin: 0;
+          opacity: 0.7;
+        }
+
+        /* ==========================================================================
+           DESKTOP ENHANCEMENTS (Keeps it clean on wider screens)
+           ========================================================================== */
+        @media (min-width: 768px) {
+          .minimal-footer {
+            padding: 80px 40px 50px;
+          }
+
+          .footer-actions {
+            max-width: 600px;
+            flex-direction: row;
+            align-items: center;
+          }
+
+          .whatsapp-pill {
+            flex: 1.2;
+          }
+
+          .action-group-secondary {
+            flex: 2;
+            width: 100%;
+          }
         }
       `}</style>
     </footer>
