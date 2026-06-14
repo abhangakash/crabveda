@@ -289,7 +289,7 @@ export default function Hero() {
         /* ==========================================================================
            TABLET & MOBILE BREAKPOINTS (Fixed overlapping layout errors)
            ========================================================================== */
-        @media (max-width: 968px) {
+       @media (max-width: 1100px) {
           .premium-hero {
             /* 100px to 110px leaves optimal structural buffer for fixed components */
             padding: 110px 24px 60px; 
@@ -299,22 +299,23 @@ export default function Hero() {
           .hero-interface-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 40px;
+            gap: 48px;
+            max-width: 800px;
+            margin: 0 auto;
           }
 
           .product-visual-showcase {
             order: 1;
             width: 100%;
+            display: flex;
+            justify-content: center;
           }
 
-          .hero-banner-inner-box {
+         .hero-banner-inner-box {
             position: relative;
             width: 100%;
-            max-width: 640px;
-            margin: 0 auto;
+            max-width: 750px;
             aspect-ratio: 16 / 10;
-            border-radius: 16px;
-            box-shadow: 0 12px 30px rgba(26, 16, 8, 0.04);
           }
 
           .hero-main-banner-img {
@@ -324,7 +325,8 @@ export default function Hero() {
 
           .editorial-text-panel {
             order: 2;
-            padding: 0;
+            max-width: 700px;
+            margin: 0 auto;
             align-items: center;
             text-align: center;
           }
@@ -341,7 +343,7 @@ export default function Hero() {
         @media (max-width: 600px) {
           .premium-hero {
             /* Gives comfortable breathing room from a top fixed header */
-            padding: 96px 16px 48px;
+            padding: 75px 16px 48px;
           }
 
           .hero-interface-wrapper {
@@ -349,15 +351,15 @@ export default function Hero() {
           }
 
           .hero-banner-inner-box {
-  position: relative;
-  width: calc(100vw + 32px);
-  margin-left: -16px;
-  margin-right: -16px;
-  aspect-ratio: 16 / 10;
-  border-radius: 0;
-  overflow: hidden;
-  box-shadow: none;
-}
+            position: relative;
+            width: calc(100vw + 32px);
+            margin-left: -16px;
+            margin-right: -16px;
+            aspect-ratio: 16 / 10;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+          }
 
           .editorial-text-panel {
             padding: 0 8px;
