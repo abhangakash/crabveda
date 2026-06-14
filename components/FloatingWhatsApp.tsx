@@ -14,7 +14,7 @@ export default function StickyOrderBar() {
     // Start a timer to show the sticky elements after 5 seconds (5000 milliseconds)
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 5000);
+    }, 10000);
 
     // Clean up the timer if the component unmounts before 5 seconds pass
     return () => clearTimeout(timer);
