@@ -1,11 +1,25 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 const WHATSAPP_URL =
   "https://wa.me/919921297518?text=Hello%20CrabVeda!%20I%20want%20to%20order%201%20bottle%20of%20CrabVeda%20Ayurvedic%20Crab%20Oil%20(200ml%20%E2%82%B9360).%20Please%20confirm%20my%20order.";
 
 const INSTAGRAM_URL = "https://www.instagram.com/crabveda?igsh=M2VoNzRoOGhvMzFu";
 
 export default function StickyOrderBar() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Start a timer to show the sticky elements after 5 seconds (5000 milliseconds)
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 5000);
+
+    // Clean up the timer if the component unmounts before 5 seconds pass
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       {/* Floating Instagram Brand Action */}
@@ -14,7 +28,7 @@ export default function StickyOrderBar() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Follow CrabVeda on Instagram"
-        className="floating-insta-anchor"
+        className={`floating-insta-anchor ${isVisible ? "is-visible" : ""}`}
       >
         <span className="insta-pulse-ring" />
         <div className="insta-glass-canvas">
@@ -36,7 +50,7 @@ export default function StickyOrderBar() {
       </a>
 
       {/* Main Bottom Sticky Bar Context Container */}
-      <div className="modern-sticky-bar">
+      <div className={`modern-sticky-bar ${isVisible ? "is-visible" : ""}`}>
         <div className="sticky-bar-container">
           
           {/* Left Side: Product Identity Summary */}
@@ -47,7 +61,6 @@ export default function StickyOrderBar() {
             </div>
             
             <div className="product-price-display">
-              {/* 2-3 word high-end context description for mobile viewports */}
               <span className="price-label-desc">Premium Specialist Therapy</span>
               <div className="price-digits-wrapper">
                 <span className="price-currency">₹</span>
@@ -87,7 +100,7 @@ export default function StickyOrderBar() {
            ========================================================================== */
         .floating-insta-anchor {
           position: fixed;
-          bottom: 96px; /* Sits precisely right above the action bar component */
+          bottom: 96px;
           right: 24px;
           z-index: 99998;
           width: 52px;
@@ -98,7 +111,19 @@ export default function StickyOrderBar() {
           text-decoration: none;
           outline: none;
           box-sizing: border-box;
-          animation: slide-up-entrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+          
+          /* Initial State: Hidden and shifted down */
+          opacity: 0;
+          transform: translateY(20px);
+          pointer-events: none;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+
+        /* Active State handled by CSS class triggers instead of automated keyframes */
+        .floating-insta-anchor.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
         }
 
         .insta-glass-canvas {
@@ -132,7 +157,6 @@ export default function StickyOrderBar() {
           animation: insta-pulse-wave 2.2s infinite cubic-bezier(0.25, 0, 0, 1);
         }
 
-        /* Instagram Actions & Hover Dynamics */
         .floating-insta-anchor:hover .insta-glass-canvas {
           transform: scale(1.08) translateY(-2px);
           box-shadow: 0 16px 35px rgba(218, 39, 67, 0.22), 0 4px 12px rgba(26, 16, 8, 0.08);
@@ -175,7 +199,15 @@ export default function StickyOrderBar() {
           align-items: center;
           width: 100%;
           box-sizing: border-box;
-          animation: slide-up-entrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+          /* Initial State: Slid out of view completely */
+          transform: translateY(100%);
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Active State triggered after 5 seconds */
+        .modern-sticky-bar.is-visible {
+          transform: translateY(0);
         }
 
         .sticky-bar-container {
@@ -317,11 +349,6 @@ export default function StickyOrderBar() {
         .premium-action-btn:hover .btn-glow-layer {
           transform: translateX(100%);
           transition: transform 0.8s ease-in-out;
-        }
-
-        @keyframes slide-up-entrance {
-          from { transform: translateY(100%); }
-          to { transform: translateY(0); }
         }
 
         /* ==========================================================================
