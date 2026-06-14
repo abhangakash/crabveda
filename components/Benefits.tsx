@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 const benefits = [
   {
@@ -36,6 +37,7 @@ const benefits = [
 export default function Benefits() {
   return (
     <section id="benefits" className="benefits-section">
+      
       <div className="benefits-layout-container">
         
         {/* LEFT COLUMN: Sticky Editorial Header Block */}
@@ -50,7 +52,6 @@ export default function Benefits() {
             A masterfully balanced blend of natural crab extract and time-tested Ayurvedic herbs working systemically to restore structural vitality.
           </p>
           
-          {/* Visual trust indicator line */}
           <div className="editorial-accent-line" />
         </div>
 
@@ -58,7 +59,6 @@ export default function Benefits() {
         <div className="benefits-grid-stream">
           {benefits.map((benefit, index) => (
             <div key={index} className="premium-benefit-card">
-              {/* Subtle background overlay index tracking */}
               <div className="card-index-watermark">
                 {String(index + 1).padStart(2, "0")}
               </div>
@@ -77,8 +77,21 @@ export default function Benefits() {
 
       </div>
 
-      <style>{`
-        /* --- Architectural Variable Rules --- */
+      {/* FULL UNMASKED BOTTOM BANNER STREAM */}
+      <div className="benefits-footer-banner-wrapper">
+        <Image 
+          src="/img7.png"
+          alt="Ayurvedic Natural Ingredients & Herbs Backdrop"
+          fill
+          priority
+          sizes="100vw"
+          className="benefits-bottom-banner-img"
+        />
+        {/* Micro-edge alignments instead of heavy dark masks */}
+        <div className="banner-edge-alignment" />
+      </div>
+
+      <style jsx global>{`
         .benefits-section {
           --forest: #1E3A2F;
           --gold: #C9901A;
@@ -86,8 +99,8 @@ export default function Benefits() {
           --text-dark: #2B3631;
           --text-muted: #5C6661;
           
-          background: linear-gradient(180deg, #EDE0C4 0%, var(--bg-beige) 200px, var(--bg-beige) 100%);
-          padding: 120px 24px;
+          background: linear-gradient(180deg, #EDE0C4 0%, var(--bg-beige) 300px, var(--bg-beige) 100%);
+          padding: 80px 0 0 0;
           position: relative;
           overflow: hidden;
           box-sizing: border-box;
@@ -99,17 +112,20 @@ export default function Benefits() {
           width: 100%;
           display: grid;
           grid-template-columns: 0.8fr 1.2fr;
-          gap: 80px;
+          gap: 60px;
           align-items: flex-start;
+          padding: 0 24px;
+          box-sizing: border-box;
+          margin-bottom: 80px; /* Healthy space before the image starts */
         }
 
-        /* --- Left Column: Sticky Branding Header --- */
         .benefits-header-sticky {
           position: sticky;
-          top: 120px;
+          top: 40px;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+          z-index: 3;
         }
 
         .section-mini-badge {
@@ -119,14 +135,14 @@ export default function Benefits() {
           color: var(--gold);
           padding: 6px 14px;
           border-radius: 100px;
-          font-family: var(--font-body), sans-serif;
+          font-family: var(--font-body), 'Lora', sans-serif;
           font-size: 0.72rem;
           font-weight: 600;
           letter-spacing: 0.08em;
           text-transform: uppercase;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
           border: 1px solid rgba(201, 144, 26, 0.15);
-          margin-bottom: 20px;
+          margin-bottom: 16px;
         }
 
         .badge-bullet {
@@ -136,21 +152,21 @@ export default function Benefits() {
         }
 
         .section-main-heading {
-          font-family: var(--font-display), serif;
-          font-size: clamp(2rem, 3.5vw, 2.8rem);
+          font-family: var(--font-display), 'Cinzel', serif;
+          font-size: clamp(2rem, 3.5vw, 2.6rem);
           color: #4A3428 !important;
-           line-height: 1.15;
-          margin: 0 0 16px 0;
+          line-height: 1.15;
+          margin: 0 0 12px 0;
           font-weight: 700;
           letter-spacing: -0.01em;
         }
 
         .section-context-desc {
-          font-family: var(--font-body), sans-serif;
-          font-size: 0.98rem;
+          font-family: var(--font-body), 'Lora', sans-serif;
+          font-size: 0.95rem;
           color: var(--text-muted);
-          line-height: 1.65;
-          margin: 0 0 32px 0;
+          line-height: 1.6;
+          margin: 0 0 24px 0;
         }
 
         .editorial-accent-line {
@@ -160,18 +176,17 @@ export default function Benefits() {
           opacity: 0.6;
         }
 
-        /* --- Right Column: Benefit Cards --- */
         .benefits-grid-stream {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 24px;
+          gap: 20px;
         }
 
         .premium-benefit-card {
           background: #FFFFFF;
           border: 1px solid rgba(30, 58, 47, 0.04);
-          border-radius: 20px;
-          padding: 32px 24px;
+          border-radius: 16px;
+          padding: 24px;
           position: relative;
           overflow: hidden;
           box-shadow: 0 4px 20px rgba(30, 58, 47, 0.02);
@@ -188,28 +203,28 @@ export default function Benefits() {
         .card-top-row {
           display: flex;
           align-items: center;
-          gap: 14px;
-          margin-bottom: 16px;
+          gap: 12px;
+          margin-bottom: 12px;
           position: relative;
           z-index: 2;
         }
 
         .benefit-icon-sphere {
-          width: 44px;
-          height: 44px;
-          border-radius: 12px;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
           background: rgba(201, 144, 26, 0.06);
           border: 1px solid rgba(201, 144, 26, 0.15);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           flex-shrink: 0;
         }
 
         .benefit-card-title {
-          font-family: var(--font-heading), serif;
-          font-size: 1.05rem;
+          font-family: var(--font-heading), 'Cinzel', serif;
+          font-size: 1rem;
           color: var(--forest);
           font-weight: 600;
           margin: 0;
@@ -217,10 +232,10 @@ export default function Benefits() {
         }
 
         .benefit-card-desc {
-          font-family: var(--font-body), sans-serif;
-          font-size: 0.88rem;
+          font-family: var(--font-body), 'Lora', sans-serif;
+          font-size: 0.85rem;
           color: var(--text-muted);
-          line-height: 1.6;
+          line-height: 1.55;
           margin: 0;
           position: relative;
           z-index: 2;
@@ -230,24 +245,47 @@ export default function Benefits() {
           position: absolute;
           bottom: -10px;
           right: 12px;
-          font-family: var(--font-display), serif;
-          font-size: 4rem;
+          font-family: var(--font-display), 'Cinzel', serif;
+          font-size: 3.5rem;
           font-weight: 800;
-          color: rgba(30, 58, 47, 0.03);
+          color: rgba(30, 58, 47, 0.02);
           user-select: none;
           pointer-events: none;
           line-height: 1;
         }
 
+        /* --- Full Unmasked Image Wrapper --- */
+        .benefits-footer-banner-wrapper {
+          position: relative;
+          width: 100%;
+          height: 660px; /* Increased height so the full graphic shines */
+          overflow: hidden;
+        }
+
+        .benefits-bottom-banner-img {
+          object-fit: cover;
+          object-position: center center; /* Keeps the middle framing clear */
+        }
+
+        /* Clean 1px micro-blending layer to avoid sharp pixelation line at base */
+        .banner-edge-alignment {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg, rgba(250, 247, 242, 0.1) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 85%, rgba(250, 247, 242, 0.1) 100%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
         .desktop-only { display: block; }
 
         /* ==========================================================================
-           TABLET RESPONSIVE PARADIGM (1-Col Matrix Layout)
+           RESPONSIVE SYSTEMS
            ========================================================================== */
         @media (max-width: 992px) {
           .benefits-layout-container {
             grid-template-columns: 1fr;
-            gap: 48px;
+            gap: 32px;
+            margin-bottom: 48px;
           }
 
           .benefits-header-sticky {
@@ -257,15 +295,21 @@ export default function Benefits() {
             text-align: center;
           }
 
+          .benefits-footer-banner-wrapper {
+            height: 320px;
+          }
+
           .desktop-only { display: none; }
         }
 
-        /* ==========================================================================
-           MOBILE NATIVE PARADIGM (Horizontal Edge Swipe Stream)
-           ========================================================================== */
         @media (max-width: 640px) {
           .benefits-section {
-            padding: 80px 0 80px 0; /* Remove parent padding to let slider snap to edges */
+            padding: 60px 0 0 0;
+          }
+
+          .benefits-layout-container {
+            padding: 0;
+            margin-bottom: 32px;
           }
 
           .benefits-header-sticky {
@@ -273,34 +317,31 @@ export default function Benefits() {
           }
 
           .section-main-heading {
-            font-size: 2.2rem;
+            font-size: 2rem;
           }
 
-          /* Transform layout into a modern touch-friendly carousel track */
           .benefits-grid-stream {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 10px 20px 30px 20px;
-            gap: 16px;
+            padding: 10px 20px 24px 20px;
+            gap: 14px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
           }
 
-          /* Hide native scrollbars while keeping execution functional */
           .benefits-grid-stream::-webkit-scrollbar {
             display: none;
           }
 
           .premium-benefit-card {
-            flex: 0 0 85%; /* Shows a preview clip of the next card on-screen */
+            flex: 0 0 82%;
             scroll-snap-align: start;
-            padding: 28px 20px;
-            box-shadow: 0 10px 25px rgba(30, 58, 47, 0.04);
+            padding: 24px 20px;
           }
-          
-          .card-index-watermark {
-            font-size: 3.5rem;
+
+          .benefits-footer-banner-wrapper {
+            height: 260px; /* Generous aspect ratio space preserved for mobile */
           }
         }
       `}</style>

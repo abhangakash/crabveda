@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -85,37 +86,61 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Modern Cascading Column Masonry Grid */}
-        <div className="testimonials-masonry-stream">
-          {testimonials.map((t, i) => (
-            <div key={i} className="editorial-testimonial-card">
-              
-              {/* Subtle Elegant Watermark Quote Graphic */}
-              <div className="quote-icon-watermark">“</div>
-
-              <div className="testimonial-profile-row">
-                <div className="minimal-avatar-initials">
-                  {t.initials}
-                </div>
-                <div className="profile-identity-meta">
-                  <h4 className="user-name-text">{t.name}</h4>
-                  <span className="user-location-label">
-                    <span className="geo-dot">📍</span> {t.location}
-                  </span>
-                </div>
+        {/* Dynamic Split Layout: Media Box + Masonry Stream */}
+        <div className="testimonials-split-layout">
+          
+          {/* Left Column: Your /img6.png Feature Showcase Card */}
+          <div className="testimonials-media-showcase">
+            <div className="media-sticky-wrapper">
+              <Image 
+                src="/img8.png"
+                alt="CrabVeda User Transformation and Relief"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="testimonial-showcase-image"
+                priority
+              />
+              <div className="media-vignette-overlay" />
+              <div className="media-floating-caption">
+                <h4>Clinically Tested Efficacy</h4>
+                <p>100% natural compounds designed for rapid, target-deep absorption.</p>
               </div>
-
-              <Stars count={t.rating} />
-
-              <p className="user-testimonial-quote">
-                &ldquo;{t.text}&rdquo;
-              </p>
             </div>
-          ))}
+          </div>
+
+          {/* Right Column: Cascading Review Stream */}
+          <div className="testimonials-masonry-stream">
+            {testimonials.map((t, i) => (
+              <div key={i} className="editorial-testimonial-card">
+                
+                {/* Subtle Elegant Watermark Quote Graphic */}
+                <div className="quote-icon-watermark">“</div>
+
+                <div className="testimonial-profile-row">
+                  <div className="minimal-avatar-initials">
+                    {t.initials}
+                  </div>
+                  <div className="profile-identity-meta">
+                    <h4 className="user-name-text">{t.name}</h4>
+                    <span className="user-location-label">
+                      <span className="geo-dot">📍</span> {t.location}
+                    </span>
+                  </div>
+                </div>
+
+                <Stars count={t.rating} />
+
+                <p className="user-testimonial-quote">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </div>
 
-      <style>{`
+      <style jsx global>{`
         .testimonials-section {
           --forest: #1E3A2F;
           --gold: #C9901A;
@@ -130,14 +155,14 @@ export default function Testimonials() {
         }
 
         .testimonials-container {
-          max-width: 1140px;
+          max-width: 1200px;
           margin: 0 auto;
           width: 100%;
         }
 
         .testimonials-header {
           text-align: center;
-          margin-bottom: 56px;
+          margin-bottom: 48px;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -189,14 +214,14 @@ export default function Testimonials() {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 20px;
-          margin-bottom: 64px;
+          margin-bottom: 56px;
         }
 
         .metric-pill-card {
           background: #FFFFFF;
           border: 1px solid rgba(30, 58, 47, 0.03);
           border-radius: 16px;
-          padding: 24px 20px;
+          padding: 20px;
           text-align: center;
           box-shadow: 0 4px 15px rgba(30, 58, 47, 0.01);
         }
@@ -217,10 +242,70 @@ export default function Testimonials() {
           font-weight: 500;
         }
 
-        /* --- Testimonial Masonry Engine Layout --- */
+        /* --- Split Layout Engine Container --- */
+        .testimonials-split-layout {
+          display: grid;
+          grid-template-columns: 0.85fr 1.15fr; /* 42% / 58% dynamic space balance */
+          gap: 40px;
+          align-items: flex-start;
+        }
+
+        /* --- Image Showcase Card Styling (/img6.png) --- */
+        .testimonials-media-showcase {
+          width: 100%;
+        }
+
+        .media-sticky-wrapper {
+          position: relative;
+          width: 100%;
+          height: 560px; /* Expansive architectural viewport portrait container */
+          border-radius: 24px;
+          overflow: hidden;
+          box-shadow: 0 20px 40px rgba(30, 58, 47, 0.08);
+        }
+
+        .testimonial-showcase-image {
+          object-fit: cover;
+          object-position: center center;
+        }
+
+        .media-vignette-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(14, 40, 32, 0.9) 0%, rgba(14, 40, 32, 0.2) 50%, transparent 100%);
+          z-index: 2;
+        }
+
+        .media-floating-caption {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 32px;
+          box-sizing: border-box;
+          color: #FFFFFF;
+          z-index: 3;
+        }
+
+        .media-floating-caption h4 {
+          font-family: var(--font-heading), serif;
+          font-size: 1.25rem;
+          margin: 0 0 6px 0;
+          color: var(--gold);
+        }
+
+        .media-floating-caption p {
+          font-family: var(--font-body), sans-serif;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          margin: 0;
+          opacity: 0.9;
+        }
+
+        /* --- Testimonial Masonry Column Stream --- */
         .testimonials-masonry-stream {
-          columns: 3;
-          column-gap: 24px;
+          columns: 2; /* Perfectly matches split view width specs */
+          column-gap: 20px;
           width: 100%;
         }
 
@@ -231,8 +316,8 @@ export default function Testimonials() {
           background: #FFFFFF;
           border: 1px solid rgba(30, 58, 47, 0.04);
           border-radius: 20px;
-          padding: 32px 28px;
-          margin-bottom: 24px;
+          padding: 28px 24px;
+          margin-bottom: 20px;
           position: relative;
           overflow: hidden;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
@@ -260,13 +345,13 @@ export default function Testimonials() {
         .testimonial-profile-row {
           display: flex;
           align-items: center;
-          gap: 14px;
-          margin-bottom: 20px;
+          gap: 12px;
+          margin-bottom: 16px;
         }
 
         .minimal-avatar-initials {
-          width: 46px;
-          height: 46px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           background: rgba(30, 58, 47, 0.04);
           border: 1px solid rgba(30, 58, 47, 0.08);
@@ -274,10 +359,9 @@ export default function Testimonials() {
           align-items: center;
           justify-content: center;
           font-family: var(--font-heading), sans-serif;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 700;
           color: var(--forest);
-          letter-spacing: 0.02em;
           flex-shrink: 0;
         }
 
@@ -288,7 +372,7 @@ export default function Testimonials() {
 
         .user-name-text {
           font-family: var(--font-heading), serif;
-          font-size: 1rem;
+          font-size: 0.95rem;
           font-weight: 700;
           color: var(--forest);
           margin: 0 0 2px 0;
@@ -296,43 +380,52 @@ export default function Testimonials() {
 
         .user-location-label {
           font-family: var(--font-body), sans-serif;
-          font-size: 0.78rem;
+          font-size: 0.75rem;
           color: var(--text-muted);
           display: inline-flex;
           align-items: center;
         }
 
         .geo-dot {
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           margin-right: 3px;
         }
 
         .star-rating-row {
           display: flex;
           gap: 3px;
-          margin-bottom: 14px;
+          margin-bottom: 12px;
         }
 
         .vector-star {
           color: var(--gold);
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           line-height: 1;
         }
 
         .user-testimonial-quote {
           font-family: var(--font-body), sans-serif;
-          font-size: 0.9rem;
+          font-size: 0.88rem;
           color: var(--text-dark);
-          line-height: 1.65;
+          line-height: 1.6;
           margin: 0;
         }
 
         /* ==========================================================================
-           RESPONSIVE RE-FLOW SYSTEM (Adapting Columns Seamlessly)
+           RESPONSIVE RE-FLOW SYSTEM
            ========================================================================== */
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
+          .testimonials-split-layout {
+            grid-template-columns: 1fr; /* Stacks image and stream vertically */
+            gap: 32px;
+          }
+
+          .media-sticky-wrapper {
+            height: 380px; /* Adjust portrait frame to clean landscape banner on tablets */
+          }
+
           .testimonials-masonry-stream {
-            columns: 2; /* Drops elegantly to 2 columns on tablets */
+            columns: 2;
           }
         }
 
@@ -342,16 +435,15 @@ export default function Testimonials() {
           }
 
           .testimonials-header {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
           }
 
-          /* Metrics Dashboard switches to horizontal swipe track to reduce height footprint */
           .metrics-dashboard-bar {
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             gap: 12px;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             padding-bottom: 8px;
           }
           
@@ -360,14 +452,22 @@ export default function Testimonials() {
           }
 
           .metric-pill-card {
-            flex: 0 0 70%;
+            flex: 0 0 75%;
             scroll-snap-align: start;
-            padding: 20px 16px;
+            padding: 16px;
           }
 
-          /* Convert masonry elements back into clean single column cards */
+          .media-sticky-wrapper {
+            height: 260px; /* Compact presentation frame on ultra-narrow phones */
+            border-radius: 16px;
+          }
+
+          .media-floating-caption {
+            padding: 20px;
+          }
+
           .testimonials-masonry-stream {
-            columns: 1;
+            columns: 1; /* Clean single-row scrolling architecture */
           }
 
           .editorial-testimonial-card {

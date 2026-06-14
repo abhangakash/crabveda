@@ -1,7 +1,14 @@
 "use client";
+import Image from "next/image";
 
 const ingredients = [
-  { name: "Crab Extract", icon: "🦀", benefit: "Core active ingredient for joint repair & pain relief", hero: true },
+  { 
+    name: "Crab Extract", 
+    image: "/img5.png",
+    icon: "🦀", 
+    benefit: "Core active ingredient for joint repair & pain relief", 
+    hero: true 
+  },
   { name: "Mahanarayan Taila", icon: "🫙", benefit: "Ancient Ayurvedic base oil for deep penetration" },
   { name: "Ashwagandha", icon: "🌱", benefit: "Strengthens muscles, reduces fatigue & inflammation" },
   { name: "Shallaki", icon: "🌿", benefit: "Boswellia extract — clinically proven for joint health" },
@@ -35,18 +42,37 @@ export default function Ingredients() {
         {/* Dynamic Architectural Layout */}
         <div className="ingredients-layout-grid">
           
-          {/* HERO CARD: Highlights Crab Extract as the unique selling point */}
+          {/* THE HERO CARD: No separate blocks. Text is layered directly ON top of the image */}
           {heroIngredient && (
             <div className="ingredient-hero-card">
-              <div className="hero-card-glow" />
-              <div className="hero-badge-tag">Key Catalyst</div>
-              <div className="hero-icon-shell">{heroIngredient.icon}</div>
-              <h3 className="hero-ingredient-name">{heroIngredient.name}</h3>
-              <p className="hero-ingredient-desc">{heroIngredient.benefit}</p>
+              
+              {/* Full-Bleed Background Image Component */}
+              <Image 
+                src={heroIngredient.image}
+                alt={heroIngredient.name}
+                fill
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="hero-background-media"
+                priority
+              />
+              
+              {/* Dark Shroud Layer to ensure text is perfectly legible over the image */}
+              <div className="hero-image-overlay-shroud" />
+
+              {/* Text Panel Sitting ON Top of the Image */}
+              <div className="hero-card-content-overlay">
+                <div className="hero-badge-tag">Key Catalyst</div>
+                <div className="hero-title-cluster">
+                  <div className="hero-icon-shell">{heroIngredient.icon}</div>
+                  <h3 className="hero-ingredient-name">{heroIngredient.name}</h3>
+                </div>
+                <p className="hero-ingredient-desc">{heroIngredient.benefit}</p>
+              </div>
+
             </div>
           )}
 
-          {/* BOTANICAL GRID: Interactive Cards for supporting herbs */}
+          {/* MINIMALIST BOTANICAL MATRIX */}
           <div className="ingredients-sub-grid">
             {regularIngredients.map((ing, i) => (
               <div key={i} className="botanical-card">
@@ -74,7 +100,7 @@ export default function Ingredients() {
 
       </div>
 
-      <style>{`
+      <style jsx global>{`
         .ingredients-section {
           --forest: #1E3A2F;
           --gold: #C9901A;
@@ -89,7 +115,7 @@ export default function Ingredients() {
         }
 
         .ingredients-container {
-          max-width: 1140px;
+          max-width: 1200px;
           margin: 0 auto;
           width: 100%;
         }
@@ -143,77 +169,93 @@ export default function Ingredients() {
           max-width: 540px;
         }
 
-        /* --- Layout Grid Architectural rules --- */
         .ingredients-layout-grid {
-          display: grid;
-          grid-template-columns: 0.7fr 1.3fr;
+          display: flex;
+          flex-direction: column;
           gap: 32px;
           margin-bottom: 48px;
-          align-items: stretch;
         }
 
-        /* --- Left Column: Hero Ingredient Display --- */
+        /* --- True Text-ON-Image Single Container Design --- */
         .ingredient-hero-card {
-          background: linear-gradient(145deg, var(--forest), #142820);
-          color: #FFFFFF;
-          border-radius: 24px;
-          padding: 48px 36px;
           position: relative;
+          width: 100%;
+          min-height: 440px; /* Great cinematic canvas height */
+          border-radius: 24px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          box-shadow: 0 20px 40px rgba(30, 58, 47, 0.15);
+          justify-content: flex-end; /* Pushes content down elegantly, or change to center/flex-start depending on framing */
+          box-shadow: 0 20px 40px rgba(30, 58, 47, 0.12);
         }
 
-        .hero-card-glow {
+        .hero-background-media {
+          object-fit: cover;
+          object-position: center center;
+          z-index: 1;
+        }
+
+        /* Ambient shroud to protect text readability on all viewports */
+        .hero-image-overlay-shroud {
           position: absolute;
-          top: -20%;
-          right: -20%;
-          width: 80%;
-          height: 80%;
-          background: radial-gradient(circle, rgba(201, 144, 26, 0.25) 0%, transparent 70%);
-          pointer-events: none;
+          inset: 0;
+          background: linear-gradient(to top, rgba(10, 24, 18, 0.95) 0%, rgba(10, 24, 18, 0.4) 60%, rgba(10, 24, 18, 0.1) 100%);
+          z-index: 2;
+        }
+
+        /* Content block floating safely above the background graphic */
+        .hero-card-content-overlay {
+          position: relative;
+          z-index: 3;
+          padding: 60px 48px;
+          color: #FFFFFF;
+          max-width: 800px;
+          box-sizing: border-box;
         }
 
         .hero-badge-tag {
-          position: absolute;
-          top: 24px;
-          left: 24px;
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          padding: 4px 12px;
+          display: inline-block;
+          background: rgba(255, 255, 255, 0.12);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 6px 14px;
           border-radius: 100px;
           font-size: 0.68rem;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           color: var(--gold);
+          margin-bottom: 20px;
+        }
+
+        .hero-title-cluster {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 12px;
         }
 
         .hero-icon-shell {
-          font-size: 3.5rem;
-          margin-bottom: 24px;
+          font-size: 2.8rem;
           line-height: 1;
         }
 
         .hero-ingredient-name {
           font-family: var(--font-display), serif;
-          font-size: 1.8rem;
+          font-size: 2.4rem;
           font-weight: 700;
-          margin: 0 0 12px 0;
+          margin: 0;
           letter-spacing: 0.01em;
         }
 
         .hero-ingredient-desc {
           font-family: var(--font-body), sans-serif;
-          font-size: 0.95rem;
+          font-size: 1.15rem;
           line-height: 1.6;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.9);
           margin: 0;
         }
 
-        /* --- Right Column: Botanical Matrix Sub Grid --- */
+        /* --- Supporting Herb Matrix Blocks --- */
         .ingredients-sub-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -229,10 +271,11 @@ export default function Ingredients() {
           flex-direction: column;
           gap: 8px;
           box-shadow: 0 4px 15px rgba(30, 58, 47, 0.01);
-          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
         }
 
         .botanical-card:hover {
+          transform: translateY(-2px);
           border-color: rgba(201, 144, 26, 0.3);
           box-shadow: 0 10px 25px rgba(30, 58, 47, 0.04);
         }
@@ -244,13 +287,13 @@ export default function Ingredients() {
         }
 
         .botanical-icon {
-          font-size: 1.2rem;
+          font-size: 1.3rem;
           line-height: 1;
         }
 
         .botanical-name {
           font-family: var(--font-heading), serif;
-          font-size: 0.92rem;
+          font-size: 1rem;
           font-weight: 700;
           color: var(--forest);
           margin: 0;
@@ -258,13 +301,12 @@ export default function Ingredients() {
 
         .botanical-desc {
           font-family: var(--font-body), sans-serif;
-          font-size: 0.8rem;
+          font-size: 0.85rem;
           color: var(--text-muted);
           line-height: 1.5;
           margin: 0;
         }
 
-        /* --- Trust Banner Container --- */
         .ingredients-trust-banner {
           background: #FFFFFF;
           border-radius: 16px;
@@ -300,15 +342,27 @@ export default function Ingredients() {
         }
 
         /* ==========================================================================
-           RESPONSIVE STRUCTURAL MEDIA QUERIES (Optimized for Mobile/Tab views)
+           RESPONSIVE HANDLERS
            ========================================================================== */
-        @media (max-width: 1024px) {
+        @media (max-width: 968px) {
           .ingredients-sub-grid {
-            grid-template-columns: repeat(2, 1fr); /* 2 columns on intermediate tablets */
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          .ingredient-hero-card {
+            min-height: 380px;
+          }
+
+          .hero-card-content-overlay {
+            padding: 40px 32px;
+          }
+
+          .hero-ingredient-name {
+            font-size: 2rem;
           }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
           .ingredients-section {
             padding: 80px 16px;
           }
@@ -317,33 +371,33 @@ export default function Ingredients() {
             margin-bottom: 40px;
           }
 
-          .ingredients-layout-grid {
-            grid-template-columns: 1fr; /* Stack layout vertically */
-            gap: 24px;
-          }
-
           .ingredient-hero-card {
-            padding: 36px 24px;
-            text-align: center;
-            align-items: center;
+            min-height: 340px;
           }
 
-          .hero-icon-shell {
-            font-size: 3rem;
-            margin-bottom: 16px;
+          .hero-card-content-overlay {
+            padding: 32px 20px;
           }
 
-          .ingredients-sub-grid {
-            grid-template-columns: 1fr; /* Native stack execution for optimal phone scanning */
+          .hero-title-cluster {
             gap: 12px;
           }
 
-          .botanical-card {
-            padding: 20px;
+          .hero-icon-shell {
+            font-size: 2.4rem;
           }
 
-          .ingredients-trust-banner {
-            padding: 20px;
+          .hero-ingredient-name {
+            font-size: 1.75rem;
+          }
+
+          .hero-ingredient-desc {
+            font-size: 1rem;
+          }
+
+          .ingredients-sub-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
           }
 
           .banner-content {

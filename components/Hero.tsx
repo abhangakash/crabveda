@@ -10,33 +10,26 @@ export default function Hero() {
       
       {/* IMMERSIVE BACKGROUND CANVAS */}
       <div className="hero-bg-viewport">
-        <Image 
-          src="/img1.jpeg" 
-          alt="Ayurvedic Natural Ingredients Backdrop" 
-          fill
-          priority
-          className="bg-core-image"
-        />
-        <div className="bg-dynamic-overlay" />
+        <div className="bg-ambient-glow" />
       </div>
 
       <div className="hero-interface-wrapper">
         
-        {/* DESKTOP-ONLY PRODUCT SHOWCASE PANEL */}
-        <div className="desktop-product-panel">
-          <div className="glass-display-case">
+        {/* ADAPTIVE VISUAL MODULE (Sits Right on Desktop, Jumps ABOVE content on Mobile) */}
+        <div className="product-visual-showcase">
+          <div className="hero-banner-inner-box">
             <Image 
-              src="/img2.jpeg" 
-              alt="CrabVeda Bottle" 
-              width={240} 
-              height={320} 
+              src="/img4.png"
+              alt="Ayurvedic Natural Ingredients & Herbs Backdrop"
+              fill
               priority
-              className="desktop-only-bottle"
+              sizes="(max-width: 968px) 100vw, 50vw"
+              className="hero-main-banner-img"
             />
           </div>
         </div>
 
-        {/* CONTEMPORARY EDITORIAL COPY PANEL */}
+        {/* EDITORIAL COPY PANEL (Sits Left on Desktop, Below Image on Mobile) */}
         <div className="editorial-text-panel">
           <div className="capsule-badge">100% Authentic Ayurveda</div>
           
@@ -54,28 +47,15 @@ export default function Hero() {
             <span className="pill-tag">🏃 Free Mobility</span>
           </div>
 
-          {/* DYNAMIC HYBRID TRANSACTION FRAME */}
+          {/* DYNAMIC TRANSACTION FRAME */}
           <div className="unified-action-card">
-            
-            {/* Mobile-Only Integrated Bottle (Perfect size, stays inside the card) */}
-            <div className="mobile-product-thumbnail">
-              <Image 
-                src="/img2.jpeg" 
-                alt="CrabVeda Bottle" 
-                width={70} 
-                height={95} 
-                priority
-                className="mobile-inline-bottle"
-              />
-            </div>
-
             <div className="action-details-split">
               <div className="pricing-cluster">
                 <div className="price-line">
                   <span className="tag-current">₹360</span>
                   <span className="tag-was">₹450</span>
                 </div>
-                <p className="tag-meta">200ml · Free Express Shipping</p>
+                <p className="tag-meta">200ml Bottle · Free Express Shipping</p>
               </div>
               
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="action-cta">
@@ -83,18 +63,18 @@ export default function Hero() {
                 <span>Order via WhatsApp</span>
               </a>
             </div>
-
           </div>
         </div>
 
       </div>
 
-      <style>{`
+      <style jsx global>{`
         .premium-hero {
           --emerald: #1E3A2F;
-          --amber: #C9901A;
-          --slate-light: #64748B;
-          --card-glass: rgba(255, 255, 255, 0.9);
+          --text-dark: #1A1008;
+          --gold-accent: #C9901A;
+          --slate-light: #7A6040;
+          --canvas-cream: #FDFBF7;
           
           position: relative;
           min-height: 100vh;
@@ -102,138 +82,144 @@ export default function Hero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 120px 40px 60px;
+          padding: 120px 40px 80px;
           box-sizing: border-box;
           overflow: hidden;
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          background-color: var(--canvas-cream);
         }
 
-        /* --- Full Screen Adaptive Backdrop --- */
+        /* --- Luxury Studio Background Engine --- */
         .hero-bg-viewport {
           position: absolute;
           inset: 0;
           z-index: 1;
         }
 
-        .bg-core-image {
-          object-fit: cover;
-        }
-
-        /* Ambient gradient masking: handles legibility across all screen viewports */
-        .bg-dynamic-overlay {
+        .bg-ambient-glow {
           position: absolute;
           inset: 0;
-          background: linear-gradient(90deg, #FAF9F6 45%, rgba(250,249,246,0.85) 65%, rgba(250,249,246,0.2) 100%);
+          background: radial-gradient(circle at 70% 40%, rgba(201, 144, 26, 0.08) 0%, rgba(253, 246, 232, 0) 60%);
         }
 
+        /* --- Desktop Architecture: Balanced 2-Column Grid --- */
         .hero-interface-wrapper {
           position: relative;
           z-index: 2;
-          max-width: 1140px;
+          max-width: 1200px;
           width: 100%;
           display: grid;
-          grid-template-columns: 0.9fr 1.1fr;
-          gap: 64px;
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 60px;
           align-items: center;
         }
 
-        /* --- Desktop Layout Architecture --- */
-        .desktop-product-panel {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .glass-display-case {
-          background: rgba(255, 255, 255, 0.5);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          padding: 40px;
-          border-radius: 28px;
-          border: 1px solid rgba(255,255,255,0.6);
-          box-shadow: 0 30px 60px rgba(30,58,47,0.1);
-        }
-
-        .desktop-only-bottle {
-          object-fit: contain;
-          filter: drop-shadow(0 20px 30px rgba(30,58,47,0.15));
-        }
-
-        .mobile-product-thumbnail {
-          display: none; /* Invisible on desktop */
-        }
-
-        /* --- Copywriting Architecture --- */
+        /* On Desktop, text sits on the left column */
         .editorial-text-panel {
+          grid-column: 1;
+          grid-row: 1;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+          width: 100%;
         }
 
+        /* On Desktop, image sits on the right column */
+        .product-visual-showcase {
+          grid-column: 2;
+          grid-row: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .hero-banner-inner-box {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 20px 45px rgba(26, 16, 8, 0.05);
+          background: #FFFFFF;
+        }
+
+        .hero-main-banner-img {
+          object-fit: contain;
+          object-position: center center;
+        }
+
+        /* --- Typography & Branding Tokens --- */
         .capsule-badge {
           background: var(--emerald);
           color: #FFF;
-          padding: 6px 14px;
+          padding: 6px 16px;
           border-radius: 100px;
-          font-size: 0.75rem;
+          font-family: var(--font-body), 'Lora', serif;
+          font-size: 0.72rem;
           font-weight: 600;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           margin-bottom: 24px;
+          box-shadow: 0 4px 12px rgba(30, 58, 47, 0.1);
         }
 
         .hero-heading {
-          font-size: 4rem;
-          font-weight: 800;
-          color: var(--emerald);
-          margin: 0 0 16px;
-          letter-spacing: -0.03em;
-          line-height: 1.05;
+          font-family: var(--font-display), 'Cinzel', serif;
+          font-size: clamp(2.5rem, 4vw, 3.6rem);
+          font-weight: 700;
+          color: var(--text-dark);
+          margin: 0 0 20px;
+          letter-spacing: 0.01em;
+          line-height: 1.1;
         }
 
         .hero-subheading {
           display: block;
-          font-family: Georgia, serif;
-          font-weight: 400;
+          font-family: var(--font-body), 'Lora', serif;
+          font-weight: 500;
           font-style: italic;
-          font-size: 1.8rem;
-          color: var(--amber);
-          margin-top: 6px;
+          font-size: clamp(1.2rem, 2vw, 1.7rem);
+          color: var(--gold-accent);
+          margin-top: 4px;
+          letter-spacing: 0;
         }
 
         .hero-narrative {
-          font-size: 1.1rem;
-          line-height: 1.65;
-          color: #2D3748;
+          font-family: var(--font-body), 'Lora', serif;
+          font-size: 1.05rem;
+          line-height: 1.7;
+          color: #4A3E3D;
           margin: 0 0 32px;
-          max-width: 500px;
+          max-width: 520px;
         }
 
         .pills-flexbox {
           display: flex;
-          gap: 10px;
+          gap: 12px;
           flex-wrap: wrap;
           margin-bottom: 40px;
         }
 
         .pill-tag {
-          background: rgba(30, 58, 47, 0.07);
-          color: var(--emerald);
-          padding: 6px 14px;
-          border-radius: 8px;
+          background: rgba(201, 144, 26, 0.06);
+          border: 1px solid rgba(201, 144, 26, 0.15);
+          color: var(--text-dark);
+          padding: 8px 16px;
+          border-radius: 100px;
+          font-family: var(--font-body), 'Lora', serif;
           font-size: 0.85rem;
-          font-weight: 600;
+          font-weight: 500;
         }
 
-        /* --- Desktop Action Box --- */
+        /* --- Premium Hybrid Action Card --- */
         .unified-action-card {
           background: #FFF;
-          border: 1px solid rgba(0,0,0,0.05);
-          border-radius: 24px;
-          padding: 20px 24px;
+          border: 1px solid rgba(26, 16, 8, 0.05);
+          border-radius: 20px;
+          padding: 24px;
           width: 100%;
-          max-width: 520px;
-          box-shadow: 0 12px 40px rgba(0,0,0,0.03);
+          max-width: 540px;
+          box-shadow: 0 10px 40px rgba(26, 16, 8, 0.04);
           box-sizing: border-box;
         }
 
@@ -242,30 +228,33 @@ export default function Hero() {
           align-items: center;
           justify-content: space-between;
           width: 100%;
-          gap: 20px;
+          gap: 24px;
         }
 
         .price-line {
           display: flex;
           align-items: baseline;
-          gap: 8px;
+          gap: 10px;
         }
 
         .tag-current {
+          font-family: var(--font-display), 'Cinzel', serif;
           font-size: 2.2rem;
-          font-weight: 800;
-          color: var(--emerald);
-          letter-spacing: -0.02em;
+          font-weight: 700;
+          color: var(--text-dark);
         }
 
         .tag-was {
-          font-size: 1.05rem;
+          font-family: var(--font-body), 'Lora', serif;
+          font-size: 1.1rem;
           color: var(--slate-light);
           text-decoration: line-through;
+          opacity: 0.7;
         }
 
         .tag-meta {
-          margin: 2px 0 0;
+          margin: 4px 0 0;
+          font-family: var(--font-body), 'Lora', serif;
           font-size: 0.8rem;
           color: var(--slate-light);
           font-weight: 500;
@@ -275,62 +264,78 @@ export default function Hero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 8px;
-          background: #111827;
+          gap: 10px;
+          background: var(--text-dark);
           color: #FFF;
-          padding: 16px 28px;
-          border-radius: 14px;
-          font-size: 0.95rem;
+          padding: 16px 32px;
+          border-radius: 100px;
+          font-family: var(--font-body), 'Lora', serif;
+          font-size: 0.9rem;
           font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
           text-decoration: none;
-          transition: background 0.15s;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           flex-shrink: 0;
         }
 
         .action-cta:hover {
-          background: #1F2937;
+          background: var(--emerald);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(30, 58, 47, 0.15);
         }
 
         /* ==========================================================================
-           LUXURY IMMERSIVE MOBILE SYSTEM (Zero Clashing / Zero Layout Overlaps)
+           MOBILE SYSTEM: Full width image at the absolute top, content underneath
            ========================================================================== */
         @media (max-width: 968px) {
           .premium-hero {
-            padding: 80px 16px 32px;
-            align-items: flex-end; /* Snaps interface cleanly to user view base */
-          }
-
-          /* Mask transforms into an elegant soft vertical shroud over the backdrop image */
-          .bg-dynamic-overlay {
-            background: linear-gradient(180deg, rgba(250,249,246,0.65) 0%, #FAF9F6 60%, #FAF9F6 100%);
+            padding: 5px 0 0 0; /* Clear top padding so image hugs the screen edge */
           }
 
           .hero-interface-wrapper {
-            grid-template-columns: 1fr;
-            gap: 0;
+            display: flex;
+            flex-direction: column; /* Stacks vertically */
+            gap: 32px;
           }
 
-          /* Wipe out the desktop display module completely on mobile */
-          .desktop-product-panel {
-            display: none !important;
-          }
-
-          .editorial-text-panel {
-            align-items: center;
-            text-align: center;
+          /* Force image module to the top of the flex container */
+          .product-visual-showcase {
+            order: 1;
             width: 100%;
           }
 
-          .capsule-badge {
-            margin-bottom: 16px;
+          .hero-banner-inner-box {
+              position: relative;
+              width: 100vw;
+              margin-left: calc(50% - 50vw);
+              aspect-ratio: 16 / 10;
+              border-radius: 0;
+              overflow: hidden;
+              box-shadow: none;
+            }
+
+            .hero-main-banner-img {
+              object-fit: cover;
+              object-position: center center;
+            }
+
+          /* Content panel follows gracefully beneath the image */
+          .editorial-text-panel {
+            order: 2;
+            padding: 0 20px;
+            box-sizing: border-box;
+            align-items: center;
+            text-align: center;
           }
 
           .hero-heading {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
+            margin: 0 0 12px;
           }
 
           .hero-subheading {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
           }
 
           .hero-narrative {
@@ -341,46 +346,32 @@ export default function Hero() {
           .pills-flexbox {
             justify-content: center;
             margin-bottom: 32px;
+            gap: 8px;
           }
 
-          /* Transform bottom action card into a sleek container holding the bottle image safely inside */
+          .pill-tag {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+          }
+
           .unified-action-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.8);
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 16px;
-            padding: 16px;
-            align-items: center;
-            box-shadow: 0 15px 40px rgba(30,58,47,0.08);
             max-width: 100%;
-            text-align: left;
-          }
-
-          /* Reveal the product image dynamically inside the protected bounds of the checkout card */
-          .mobile-product-thumbnail {
-            display: block;
-            background: #FFF;
-            padding: 8px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            flex-shrink: 0;
-          }
-
-          .mobile-inline-bottle {
-            object-fit: contain;
+            padding: 20px;
           }
 
           .action-details-split {
             flex-direction: column;
-            align-items: stretch;
-            gap: 12px;
+            gap: 16px;
+          }
+
+          .pricing-cluster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
           .tag-current {
-            font-size: 1.8rem;
+            font-size: 2rem;
           }
 
           .action-cta {
@@ -396,7 +387,7 @@ export default function Hero() {
 
 function WhatsAppIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ color: "#25D366" }}>
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.874L.057 23.929l6.224-1.453A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.791 9.791 0 01-5.031-1.389l-.361-.214-3.741.874.946-3.638-.235-.373A9.79 9.79 0 012.182 12C2.182 6.545 6.545 2.182 12 2.182S21.818 6.545 21.818 12 17.455 21.818 12 21.818z"/>
     </svg>
